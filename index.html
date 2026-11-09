@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LanJastipNusantara - Personal Shopper Kuliner Premium</title>
+    <meta name="description" content="Layanan Jastip Kuliner Khas Nusantara & Makanan Impor Premium dengan Layanan Pengiriman Safety Cold-Pack.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mocha: {
+                            950: '#120b08',
+                            900: '#1a110c',
+                            800: '#261912',
+                            700: '#38251b',
+                            600: '#4e3426',
+                            500: '#6d4936',
+                            300: '#a8816c',
+                        },
+                        amberGold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            300: '#fde68a',
+                        },
+                        tealAccent: {
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        },
+                        shopee: {
+                            orange: '#ee4d2d',
+                            orangeHover: '#d73211',
+                            bgChat: '#f8f9fa'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serifHeading: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="selection:bg-amberGold-500 selection:text-mocha-950 relative overflow-x-hidden antialiased">
+
+    <!-- 1. HEADER / NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 w-full z-40 px-4 sm:px-8 py-5 transition-all duration-300 bg-mocha-950/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amberGold-600 to-amberGold-400 flex items-center justify-center text-mocha-950 font-black text-lg shadow-lg group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serifHeading font-bold text-2xl text-amberGold-300 tracking-wider leading-none">LanJastip</span>
+                    <span class="text-[9px] uppercase tracking-widest text-mocha-300 font-semibold mt-0.5">Nusantara & Impor</span>
+                </div>
+            </a>
+
+            <!-- Floating Pill Navigation -->
+            <nav class="hidden md:flex items-center gap-8 bg-mocha-900/80 backdrop-blur-xl border border-white/10 px-8 py-3 rounded-full text-xs font-semibold text-mocha-300 shadow-2xl">
+                <a href="#beranda" class="hover:text-amberGold-400 transition-colors">Beranda</a>
+                <a href="#katalog" class="hover:text-amberGold-400 transition-colors">Katalog Kuliner</a>
+                <a href="#tentang" class="hover:text-amberGold-400 transition-colors">Keunggulan</a>
+                <a href="#kalkulator" class="hover:text-amberGold-400 transition-colors">Kalkulator Order</a>
+                <a href="#rekomendasi" class="hover:text-amberGold-400 transition-colors">Rekomendasi</a>
+            </nav>
+
+            <!-- Actions Header Button -->
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 bg-mocha-800/80 border border-amberGold-500/20 px-3 py-1.5 rounded-full text-xs font-bold text-amberGold-400">
+                    <i class="fa-solid fa-coins text-amberGold-500"></i>
+                    <select id="global-currency-select" onchange="updateCurrencyDisplay(this.value)" class="bg-transparent border-none focus:outline-none cursor-pointer text-xs font-bold text-amberGold-300">
+                        <option value="IDR" class="bg-mocha-900 text-white">IDR (Rp)</option>
+                        <option value="SGD" class="bg-mocha-900 text-white">SGD (S$)</option>
+                        <option value="THB" class="bg-mocha-900 text-white">THB (฿)</option>
+                        <option value="JPY" class="bg-mocha-900 text-white">JPY (¥)</option>
+                        <option value="KRW" class="bg-mocha-900 text-white">KRW (₩)</option>
+                        <option value="USD" class="bg-mocha-900 text-white">USD ($)</option>
+                    </select>
+                </div>
+                <a href="#kalkulator" class="bg-tealAccent-600 hover:bg-tealAccent-500 text-white px-5 py-2.5 rounded-full text-xs font-bold shadow-lg transition-all border border-tealAccent-400/30 flex items-center gap-2">
+                    <span>Pesan Jastip</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- FLOATING DECORATIVE ICONS -->
+    <div class="absolute top-28 left-8 w-14 opacity-20 pointer-events-none animate-float-1">
+        <i class="fa-solid fa-cookie-bite text-amberGold-500 text-4xl"></i>
+    </div>
+    <div class="absolute top-96 right-10 w-16 opacity-20 pointer-events-none animate-float-2">
+        <i class="fa-solid fa-bowl-food text-amberGold-400 text-5xl"></i>
+    </div>
+
+    <!-- 2. HERO SECTION -->
+    <section id="beranda" class="pt-36 sm:pt-44 pb-20 px-4 sm:px-8 max-w-7xl mx-auto relative">
+        <div class="text-center max-w-4xl mx-auto space-y-6 z-10 relative">
+            <h1 class="font-serifHeading text-4xl sm:text-6xl lg:text-7xl font-extrabold text-amberGold-300 leading-tight">
+                Nikmati Kelezatan Otentik dalam <span class="italic text-amberGold-500">Setiap Titipan!</span>
+            </h1>
+
+            <p class="text-mocha-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+                LanJastipNusantara sanjungan rasa khas daerah & kuliner impor hits. Kami menghadirkan makanan favorit langsung dari produsen otentik ke meja Anda dalam pengemasan cold-pack terlindungi.
+            </p>
+
+            <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#katalog" class="bg-tealAccent-600 hover:bg-tealAccent-500 text-white font-bold px-8 py-4 rounded-full shadow-xl transition-all border border-tealAccent-400/30 text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2">
+                    Pilih Makanan
+                </a>
+                <button onclick="toggleShopeeChat()" class="border border-amberGold-500/40 hover:border-amberGold-400 text-amberGold-300 font-bold px-8 py-4 rounded-full transition-all text-xs sm:text-sm tracking-wider uppercase bg-mocha-900/40 backdrop-blur-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-comments text-shopee-orange text-base"></i> Contact Admin
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. KATALOG KULINER NUSANTARA & IMPOR -->
+    <section id="katalog" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-xs font-bold text-amberGold-400 tracking-wider uppercase">Pilihan Favorit Pelanggan</span>
+            <h2 class="font-serifHeading text-3xl sm:text-4xl font-bold text-amberGold-300 mt-1">Katalog Kuliner Indonesia & Overseas</h2>
+            <p class="text-xs text-mocha-300 mt-2">Klik tombol "+" untuk langsung memasukkan barang ke kalkulator estimasi pesanan</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Item 1: Rendang -->
+            <div class="glass-mocha-card rounded-3xl p-5 relative flex flex-col justify-between group">
+                <div>
+                    <div class="absolute top-4 right-4 bg-mocha-900/90 border border-amberGold-500/30 text-amberGold-400 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span>4.9</span> <i class="fa-solid fa-star text-[10px]"></i>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Rendang Padang" class="h-36 w-full object-cover rounded-2xl border border-amberGold-500/20 shadow-xl mb-4 group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/300x200/261912/fbbf24?text=Rendang+Padang';">
+                    <span class="text-[10px] font-bold text-amberGold-400 bg-amberGold-500/10 px-2.5 py-0.5 rounded-full border border-amberGold-500/20">Padang</span>
+                    <h3 class="font-serifHeading text-lg font-bold text-white mt-1">Rendang Daging Sapi</h3>
+                    <p class="text-xs text-mocha-300 mt-1">Daging Sapi Pilihan Kemasan Vacuum 500g</p>
+                </div>
+                <div class="mt-5 pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-mocha-300 block font-semibold">Harga Satuan</span>
+                        <span class="text-base font-bold text-white">Rp 140.000</span>
+                    </div>
+                    <button onclick="quickAddOrder('Rendang Daging Padang (500g)', 140000, 'IDR', 'Padang')" class="w-9 h-9 bg-tealAccent-600 hover:bg-tealAccent-500 text-white rounded-full flex items-center justify-center transition-colors shadow-lg">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 2: Pempek -->
+            <div class="glass-mocha-card rounded-3xl p-5 relative flex flex-col justify-between group">
+                <div>
+                    <div class="absolute top-4 right-4 bg-mocha-900/90 border border-amberGold-500/30 text-amberGold-400 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span>5.0</span> <i class="fa-solid fa-star text-[10px]"></i>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=400&q=80" alt="Pempek Palembang" class="h-36 w-full object-cover rounded-2xl border border-amberGold-500/20 shadow-xl mb-4 group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/300x200/261912/fbbf24?text=Pempek+Palembang';">
+                    <span class="text-[10px] font-bold text-amberGold-400 bg-amberGold-500/10 px-2.5 py-0.5 rounded-full border border-amberGold-500/20">Palembang</span>
+                    <h3 class="font-serifHeading text-lg font-bold text-white mt-1">Pempek Palembang Combo</h3>
+                    <p class="text-xs text-mocha-300 mt-1">Paket Komplit Isi 10 Pcs + Cuko Mantap</p>
+                </div>
+                <div class="mt-5 pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-mocha-300 block font-semibold">Harga Satuan</span>
+                        <span class="text-base font-bold text-white">Rp 85.000</span>
+                    </div>
+                    <button onclick="quickAddOrder('Pempek Palembang Combo (10 Pcs)', 85000, 'IDR', 'Palembang')" class="w-9 h-9 bg-tealAccent-600 hover:bg-tealAccent-500 text-white rounded-full flex items-center justify-center transition-colors shadow-lg">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 3: Gudeg -->
+            <div class="glass-mocha-card rounded-3xl p-5 relative flex flex-col justify-between group">
+                <div>
+                    <div class="absolute top-4 right-4 bg-mocha-900/90 border border-amberGold-500/30 text-amberGold-400 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span>4.9</span> <i class="fa-solid fa-star text-[10px]"></i>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=400&q=80" alt="Gudeg Yu Djum" class="h-36 w-full object-cover rounded-2xl border border-amberGold-500/20 shadow-xl mb-4 group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/300x200/261912/fbbf24?text=Gudeg+Yu+Djum';">
+                    <span class="text-[10px] font-bold text-amberGold-400 bg-amberGold-500/10 px-2.5 py-0.5 rounded-full border border-amberGold-500/20">Jogja</span>
+                    <h3 class="font-serifHeading text-lg font-bold text-white mt-1">Gudeg Yu Djum Kaleng</h3>
+                    <p class="text-xs text-mocha-300 mt-1">Otentik Wijilan Gudeg + Ayam + Telur</p>
+                </div>
+                <div class="mt-5 pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-mocha-300 block font-semibold">Harga Satuan</span>
+                        <span class="text-base font-bold text-white">Rp 95.000</span>
+                    </div>
+                    <button onclick="quickAddOrder('Gudeg Yu Djum Kaleng Jogja', 95000, 'IDR', 'Jogja')" class="w-9 h-9 bg-tealAccent-600 hover:bg-tealAccent-500 text-white rounded-full flex items-center justify-center transition-colors shadow-lg">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Item 4: Bika Ambon -->
+            <div class="glass-mocha-card rounded-3xl p-5 relative flex flex-col justify-between group">
+                <div>
+                    <div class="absolute top-4 right-4 bg-mocha-900/90 border border-amberGold-500/30 text-amberGold-400 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span>4.8</span> <i class="fa-solid fa-star text-[10px]"></i>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80" alt="Bika Ambon Medan" class="h-36 w-full object-cover rounded-2xl border border-amberGold-500/20 shadow-xl mb-4 group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='https://placehold.co/300x200/261912/fbbf24?text=Bika+Ambon';">
+                    <span class="text-[10px] font-bold text-amberGold-400 bg-amberGold-500/10 px-2.5 py-0.5 rounded-full border border-amberGold-500/20">Medan</span>
+                    <h3 class="font-serifHeading text-lg font-bold text-white mt-1">Bika Ambon Zulaikha</h3>
+                    <p class="text-xs text-mocha-300 mt-1">Rasa Original / Pandan Legendaris Medan</p>
+                </div>
+                <div class="mt-5 pt-3 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] text-mocha-300 block font-semibold">Harga Satuan</span>
+                        <span class="text-base font-bold text-white">Rp 75.000</span>
+                    </div>
+                    <button onclick="quickAddOrder('Bika Ambon Zulaikha Medan', 75000, 'IDR', 'Medan')" class="w-9 h-9 bg-tealAccent-600 hover:bg-tealAccent-500 text-white rounded-full flex items-center justify-center transition-colors shadow-lg">
+                        <i class="fa-solid fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. BRAND VALUE PROPOSITION GRID ("LANJASTIP ADALAH") -->
+    <section id="tentang" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto relative">
+        <div class="text-center mb-16">
+            <h2 class="font-serifHeading text-3xl sm:text-5xl font-extrabold text-amberGold-400 uppercase tracking-wider">
+                LANJASTIP ADALAH
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left 2 Items -->
+            <div class="md:col-span-4 space-y-12">
+                <div class="relative pl-14">
+                    <span class="giant-num absolute -top-10 left-0">1</span>
+                    <h3 class="font-serifHeading text-xl font-bold text-white mb-2">Kualitas Bahan Khas</h3>
+                    <p class="text-xs text-mocha-300 leading-relaxed">
+                        Setiap produk dibeli langsung dari toko pusat / outlet resmi asli daerah tempat kuliner legendaris diciptakan.
+                    </p>
+                </div>
+
+                <div class="relative pl-14">
+                    <span class="giant-num absolute -top-10 left-0">2</span>
+                    <h3 class="font-serifHeading text-xl font-bold text-white mb-2">Keamanan Cold-Pack</h3>
+                    <p class="text-xs text-mocha-300 leading-relaxed">
+                        Khusus makanan basah atau lumer, kami melengkapinya dengan ice pack & kotak termal pelindung suhu.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Center Showcase Box -->
+            <div class="md:col-span-4 flex flex-col items-center justify-center my-6 md:my-0">
+                <div class="relative group">
+                    <div class="w-64 h-80 rounded-3xl glass-mocha border border-amberGold-500/30 p-6 flex flex-col items-center justify-center text-center shadow-2xl relative z-10">
+                        <div class="w-20 h-20 rounded-full bg-amberGold-500/20 flex items-center justify-center text-amberGold-400 text-3xl mb-4 border border-amberGold-500/40">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <h4 class="font-serifHeading text-2xl font-bold text-white">LanJastip</h4>
+                        <p class="text-xs text-amberGold-400 font-semibold uppercase tracking-widest mt-1">Nusantara Box</p>
+                        <p class="text-[11px] text-mocha-300 mt-3 leading-relaxed">
+                            Pengemasan standar penerbangan & pengiriman cepat kilat ke seluruh Indonesia.
+                        </p>
+                    </div>
+                </div>
+                <a href="#kalkulator" class="mt-6 bg-tealAccent-600 hover:bg-tealAccent-500 text-white font-bold px-8 py-3 rounded-full text-xs shadow-lg transition-all border border-tealAccent-400/30">
+                    Pesan Sekarang
+                </a>
+            </div>
+
+            <!-- Right 2 Items -->
+            <div class="md:col-span-4 space-y-12">
+                <div class="relative pl-14">
+                    <span class="giant-num absolute -top-10 left-0">3</span>
+                    <h3 class="font-serifHeading text-xl font-bold text-white mb-2">Pendekatan Personal</h3>
+                    <p class="text-xs text-mocha-300 leading-relaxed">
+                        Request varian rasa spesifik, tanggal kedaluwarsa paling baru, hingga catatan khusus langsung dilayani admin.
+                    </p>
+                </div>
+
+                <div class="relative pl-14">
+                    <span class="giant-num absolute -top-10 left-0">4</span>
+                    <h3 class="font-serifHeading text-xl font-bold text-white mb-2">Tim Shopper Profesional</h3>
+                    <p class="text-xs text-mocha-300 leading-relaxed">
+                        Handal dalam penanganan bagasi penerbangan sehingga makanan tidak penyet maupun rusak di perjalanan.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. INTERACTIVE ORDER FORM & CURRENCY ESTIMATOR -->
+    <section id="kalkulator" class="py-20 px-4 sm:px-8 max-w-5xl mx-auto">
+        <div class="glass-mocha rounded-3xl p-6 sm:p-10 border border-amberGold-500/30 shadow-2xl">
+            <div class="text-center mb-8">
+                <span class="text-xs font-bold text-amberGold-400 tracking-wider uppercase">Order & Hitung Estimasi</span>
+                <h2 class="font-serifHeading text-3xl font-bold text-white mt-1">Formulir Pesanan LanJastipNusantara</h2>
+            </div>
+
+            <form id="jastipOrderForm" onsubmit="submitToWhatsApp(event)" class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                <!-- Form Inputs -->
+                <div class="md:col-span-7 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Nama Pemesan *</label>
+                            <input type="text" id="custName" required placeholder="Contoh: Budi Santoso" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amberGold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">No WhatsApp Active *</label>
+                            <input type="tel" id="custPhone" required placeholder="Contoh: 08123456789" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amberGold-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-amberGold-300 mb-1">Nama Makanan / Produk *</label>
+                        <input type="text" id="itemName" required placeholder="Contoh: Rendang Daging Padang" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amberGold-400">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Kota / Negara Asal</label>
+                            <input type="text" id="itemOrigin" placeholder="Padang / SG" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amberGold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Mata Uang Asal</label>
+                            <select id="itemCurrency" onchange="recalculateForm()" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none cursor-pointer font-bold">
+                                <option value="IDR">IDR (Rp)</option>
+                                <option value="SGD">SGD (S$)</option>
+                                <option value="THB">THB (฿)</option>
+                                <option value="JPY">JPY (¥)</option>
+                                <option value="KRW">KRW (₩)</option>
+                                <option value="USD">USD ($)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Harga Satuan *</label>
+                            <input type="number" id="itemPrice" min="0" value="140000" oninput="recalculateForm()" required class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white font-bold focus:outline-none focus:border-amberGold-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Jumlah (Qty) *</label>
+                            <input type="number" id="itemQty" min="1" value="1" oninput="recalculateForm()" required class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-4 py-2.5 text-xs text-white font-bold focus:outline-none focus:border-amberGold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-amberGold-300 mb-1">Tipe Packing Safety</label>
+                            <select id="packingType" onchange="recalculateForm()" class="w-full bg-mocha-900 border border-amberGold-500/30 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none cursor-pointer">
+                                <option value="5000">Standar Dus & Bubble (+Rp 5k)</option>
+                                <option value="15000">Cold Pack Ice Bag (+Rp 15k)</option>
+                                <option value="25000">Frozen Sterofoam (+Rp 25k)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Summary Card -->
+                <div class="md:col-span-5 bg-mocha-900/90 border border-amberGold-500/30 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-serifHeading text-lg font-bold text-amberGold-300 pb-3 border-b border-white/10">Ringkasan Estimasi</h4>
+                        
+                        <div class="mt-4 space-y-2.5 text-xs">
+                            <div class="flex justify-between text-mocha-300">
+                                <span>Konversi Barang ke IDR:</span>
+                                <span id="sumBaseIDR" class="font-bold text-white">Rp 140.000</span>
+                            </div>
+                            <div class="flex justify-between text-mocha-300">
+                                <span>Fee Jastip (15%):</span>
+                                <span id="sumJastipFee" class="font-bold text-white">Rp 21.000</span>
+                            </div>
+                            <div class="flex justify-between text-mocha-300">
+                                <span>Safety Packing:</span>
+                                <span id="sumPackingFee" class="font-bold text-white">Rp 5.000</span>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-white/10">
+                                <span class="text-[11px] text-mocha-300 block">Total Estimasi Bayar (IDR):</span>
+                                <span id="finalTotalIDR" class="font-serifHeading text-3xl font-extrabold text-amberGold-400 mt-1 block">Rp 166.000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <button type="submit" class="w-full bg-tealAccent-600 hover:bg-tealAccent-500 text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 border border-tealAccent-400/30">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Send Order to WhatsApp
+                        </button>
+                        <p class="text-[10px] text-center text-mocha-300 mt-2">Target Admin: 085846732091</p>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- WIDGET CHAT PENJUAL ALA SHOPEE (FLOATING BOTTOM RIGHT) -->
+    <div id="shopeeChatBox" class="fixed bottom-4 right-4 z-50 w-80 sm:w-96 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 hidden overflow-hidden flex-col transition-all">
+        <!-- Chat Header -->
+        <div class="bg-shopee-orange text-white p-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <div class="w-10 h-10 rounded-full bg-white text-shopee-orange flex items-center justify-center font-bold text-lg shadow">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <span class="w-3 h-3 rounded-full bg-emerald-400 border-2 border-shopee-orange absolute bottom-0 right-0"></span>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm leading-none">LanJastipNusantara Official</h4>
+                    <span class="text-[10px] text-orange-100 font-medium">Online • Terhubung via WhatsApp</span>
+                </div>
+            </div>
+            <button onclick="toggleShopeeChat()" class="text-white hover:text-slate-200 text-lg px-2 focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Chat Area Body -->
+        <div id="chatMessages" class="p-4 bg-shopee-bgChat h-80 overflow-y-auto space-y-3 text-xs chat-scroll">
+            
+            <!-- Welcome Auto Message -->
+            <div class="flex items-start gap-2">
+                <div class="w-7 h-7 rounded-full bg-shopee-orange text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-1">
+                    Shop
+                </div>
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[80%] space-y-1">
+                    <p class="font-bold text-shopee-orange text-[11px]">Selamat datang di LanJastipNusantara! 👋</p>
+                    <p class="text-slate-600">Silakan pilih pertanyaan di bawah untuk langsung terhubung & pesan via WhatsApp Admin (0858-4673-2091):</p>
+                </div>
+            </div>
+
+            <!-- Quick Questions Chips -->
+            <div class="space-y-1.5 pt-1 pl-9">
+                <button onclick="sendQuickMsg('Apakah produk makanan ini ready stok?')" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-shopee-orange border border-orange-200 rounded-xl px-3 py-2 text-[11px] font-medium transition-colors flex items-center justify-between">
+                    <span>Apakah produk ini ready?</span>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                </button>
+
+                <button onclick="sendQuickMsg('Berapa lama estimasi pengiriman jastip?')" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-shopee-orange border border-orange-200 rounded-xl px-3 py-2 text-[11px] font-medium transition-colors flex items-center justify-between">
+                    <span>Berapa estimasi pengiriman?</span>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                </button>
+
+                <button onclick="sendQuickMsg('Apakah pengiriman makanan aman dan tetap fresh?')" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-shopee-orange border border-orange-200 rounded-xl px-3 py-2 text-[11px] font-medium transition-colors flex items-center justify-between">
+                    <span>Garansi makanan tetap fresh?</span>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                </button>
+
+                <button onclick="sendQuickMsg('Bagaimana cara memesan via WhatsApp?')" class="w-full text-left bg-orange-50 hover:bg-orange-100 text-shopee-orange border border-orange-200 rounded-xl px-3 py-2 text-[11px] font-medium transition-colors flex items-center justify-between">
+                    <span>Cara pesan via WhatsApp?</span>
+                    <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Chat Input Footer -->
+        <div class="p-3 bg-white border-t border-slate-200 space-y-2">
+            <form onsubmit="handleUserChatSubmit(event)" class="flex items-center gap-2">
+                <input type="text" id="chatInput" placeholder="Ketik pesan ke penjual..." class="flex-1 bg-slate-100 rounded-xl px-3.5 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-shopee-orange text-slate-800">
+                <button type="submit" class="bg-shopee-orange hover:bg-shopee-orangeHover text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+
+            <a href="https://wa.me/6285846732091" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl py-2 text-[11px] font-bold flex items-center justify-center gap-2 transition-colors">
+                <i class="fa-brands fa-whatsapp"></i> Chat Langsung di WhatsApp (0858-4673-2091)
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Chat Trigger Button -->
+    <button onclick="toggleShopeeChat()" class="fixed bottom-6 right-6 z-40 bg-shopee-orange hover:bg-shopee-orangeHover text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold text-xs transition-transform hover:scale-105 border border-orange-400/40">
+        <i class="fa-solid fa-comments text-lg"></i>
+        <span>Chat Penjual</span>
+        <span class="bg-white text-shopee-orange font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center">1</span>
+    </button>
+
+    <!-- 6. FOOTER -->
+    <footer class="bg-mocha-950 border-t border-white/5 py-12 px-4 sm:px-8 text-xs text-mocha-300">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-amberGold-500 flex items-center justify-center text-mocha-950 font-bold text-sm">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <span class="font-serifHeading font-bold text-lg text-amberGold-300">LanJastipNusantara</span>
+            </div>
+
+            <div class="flex gap-6">
+                <a href="#beranda" class="hover:text-amberGold-400 transition-colors">Beranda</a>
+                <a href="#katalog" class="hover:text-amberGold-400 transition-colors">Katalog</a>
+                <a href="#tentang" class="hover:text-amberGold-400 transition-colors">Keunggulan</a>
+                <a href="#kalkulator" class="hover:text-amberGold-400 transition-colors">Order</a>
+            </div>
+
+            <p>&copy; 2026 LanJastipNusantara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script src="script.js"></script>
+</body>
+</html>
